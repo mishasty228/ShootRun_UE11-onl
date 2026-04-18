@@ -22,12 +22,15 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "DamageBox")
 	float Damage = 20.f;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "DamageBox")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "DamageBox")
 	float Cooldown = 2.f;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "DamageBox")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "DamageBox")
 	float Lifetime = 10.f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "DamageBox")
+	FVector BoxExtent = {256,256,32};
+	
 	TArray<AActor*> OverlappingActors;
 
 	FTimerHandle PeriodicHandle;

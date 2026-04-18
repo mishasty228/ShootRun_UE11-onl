@@ -13,6 +13,7 @@ ADamageBox::ADamageBox()
 	BoxComponent = CreateDefaultSubobject<UBoxComponent>(FName("BoxComponent"));
 	BoxComponent->SetupAttachment(GetRootComponent());
 	BoxComponent->SetHiddenInGame(false);
+	BoxComponent->SetBoxExtent(BoxExtent);
 }
 
 // Called when the game starts or when spawned
