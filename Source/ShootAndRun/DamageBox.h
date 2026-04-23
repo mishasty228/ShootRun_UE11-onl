@@ -19,18 +19,19 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "DamageBox")
 	UBoxComponent* BoxComponent = nullptr;
 	
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "DamageBox")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DamageBox")
 	float Damage = 20.f;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "DamageBox")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DamageBox")
 	float Cooldown = 2.f;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "DamageBox")
-	float Lifetime = 10.f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DamageBox")
+	float Lifetime = 5.f;
 
 	TArray<AActor*> OverlappingActors;
 
 	FTimerHandle PeriodicHandle;
+	FTimerHandle DestroySelfHandle;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -38,6 +39,10 @@ protected:
 	UFUNCTION(BlueprintNativeEvent)
 	void ApplyPeriodicDamage();
 	void ApplyPeriodicDamage_Implementation();
+	
+	UFUNCTION(BlueprintNativeEvent)
+	void DestroySelf();
+	void DestroySelf_Implementation();
 
 	UFUNCTION()
 	void OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,	bool bFromSweep, const FHitResult &SweepResult);

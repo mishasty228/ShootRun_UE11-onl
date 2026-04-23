@@ -1,5 +1,13 @@
+# Rider
+*.user
+
 # Visual Studio 2015 user specific files
 .vs/
+
+# Visual Studio Code user specific files
+.vscode/
+.ignore
+*.code-workspace
 
 # Compiled Object files
 *.slo
@@ -40,7 +48,11 @@
 *.sdf
 *.VC.db
 *.VC.opendb
-.vsconfig
+
+# Why ignore data files ???
+*.json
+*.rsp
+*.res
 
 # Precompiled Assets
 SourceArt/**/*.png
@@ -48,10 +60,10 @@ SourceArt/**/*.tga
 
 # Binary Files
 Binaries/*
-Plugins/**/Binaries/*
 
 # Builds
-Build/*
+Builds/*
+BuildOutput/**
 
 # Whitelist PakBlacklist-<BuildConfiguration>.txt files
 !Build/*/
@@ -69,7 +81,15 @@ Saved/*
 
 # Compiled source files for the engine to use
 Intermediate/*
-Plugins/**/Intermediate/*
+
+# Development plugins content
+Plugins/**/Binaries
+Plugins/**/Intermediate
+Plugins/Developer/*
+
 
 # Cache files for the editor to use
 DerivedDataCache/*
+
+.idea
+.vsconfig

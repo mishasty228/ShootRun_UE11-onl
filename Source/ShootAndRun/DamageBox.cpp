@@ -24,21 +24,27 @@ void ADamageBox::BeginPlay()
 	BoxComponent->OnComponentEndOverlap.AddDynamic(this, &ThisClass::OnEndOverlap);
 	
 	GetWorld()->GetTimerManager().SetTimer(PeriodicHandle, this, &ADamageBox::ApplyPeriodicDamage, Cooldown, true);
-	SetLifeSpan(Lifetime);
+	GetWorld()->GetTimerManager().SetTimer(DestroySelfHandle, this, &ADamageBox::DestroySelf, Lifetime, false);
+	
 }
 
 void ADamageBox::ApplyPeriodicDamage_Implementation()
 {
 	for (AActor* Overlapper : OverlappingActors)
 	{
-		Overlapper->TakeDamage(Damage, FDamageEvent(), nullptr, GetOwner());
+		Overlapper->TakeDamage(Damage, FDamageEvent(), nullptr, this);
 	}
+}
+
+void ADamageBox::DestroySelf_Implementation()
+{
+	Destroy();
 }
 
 void ADamageBox::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent,	AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	OverlappingActors.Add(OtherActor);
-	OtherActor->TakeDamage(Damage, FDamageEvent(), nullptr, GetOwner());
+	OtherActor->TakeDamage(Damage, FDamageEvent(), nullptr, this);
 }
 
 
@@ -53,4 +59,3 @@ void ADamageBox::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 }
-
